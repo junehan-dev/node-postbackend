@@ -16,7 +16,7 @@ function createPost(req, res) {
 
 function listPost(req, res) {
 	const model = ListModel;
-	const query = model.find().sort({created: "desc"}).limit(10);
+	const query = model.find().select(["author", "title", "created"]).sort({created: "desc"}).limit(10);
 	query.exec((err, data) => {
 		if (err) {
 			console.log(err);

@@ -13,10 +13,6 @@ const create_schema = new mongoose.Schema(
 	
 const list_schema = new mongoose.Schema(
 	{
-		author: { type: String },
-		title: { type: String },
-		content: { type: String },
-		created: { type: Date },
 	},
 	{
 		collection: "posts"
