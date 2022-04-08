@@ -4,7 +4,9 @@
   "description": "Simple posting data backend service",
   "main": "app.js",
   "scripts": {
-    "test": "make test"
+	"server": "node ./src/app.js",
+    "test": "make test",
+    "lint": "make lint"
   },
   "repository": {
     "type": "git",
@@ -23,5 +25,8 @@
     "http-errors": "^2.0.0",
     "mongoose": "^6.2.10",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.12.0"
   }
 }
