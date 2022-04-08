@@ -1,6 +1,13 @@
 POSTING DATA BACKEND SERVICE
 ============================
 
+HOWTO
+-----
+
+:``npm run server``: run the express server application on port 3000.
+:``make lint``: linting on every src dir's js files.
+:``make test``: run test script in scripts dir(curl commands)
+
 API
 ---
 
