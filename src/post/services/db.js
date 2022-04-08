@@ -1,6 +1,9 @@
-async function createConnection(mongoose, uri) {
-	await mongoose.connect(uri);
-	return (mongoose);
+function createConnection() {
+	const mongoose = require("mongoose");
+ 	return (mongoose.connect(process.env["DB_CONN"]));
 }
 
-exports.createConnection = createConnection; 
+const conn = createConnection();
+
+
+module.exports = conn

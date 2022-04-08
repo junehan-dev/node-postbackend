@@ -6,7 +6,7 @@ const post_router = require("./post/api_router");
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use("/api/post", post_router);
-app.get("/", (req, res) => {
+app.get("/", (req, res,next) => {
 	res.send("hello World!");
 });
 
