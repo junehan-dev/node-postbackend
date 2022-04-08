@@ -1,0 +1,27 @@
+{
+  "name": "postbackend",
+  "version": "1.0.0",
+  "description": "Simple posting data backend service",
+  "main": "app.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/junehan-dev/node-postbackend.git"
+  },
+  "author": "junehan.dev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/junehan-dev/node-postbackend/issues"
+  },
+  "homepage": "https://github.com/junehan-dev/node-postbackend#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "debug": "^4.3.4",
+    "express": "^4.17.3",
+    "http-errors": "^2.0.0",
+    "mongoose": "^6.2.10",
+    "morgan": "^1.10.0"
+  }
+}
