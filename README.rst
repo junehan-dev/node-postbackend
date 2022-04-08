@@ -36,7 +36,7 @@ API
       - Failure(404)
          No respose data. respond for status of 404 only.
 
-:``/api/post/<id:post_id>/``: GET
+:``/api/post/<id\:post_id>/``: GET
 
    DESC
       Retrive Single post data by post_id.
@@ -48,7 +48,7 @@ API
       - Failure(404)
          No respose data. respond for status of 404 only.
 
-:``/api/post/<id:post_id>/``: POST
+:``/api/post/<id\:post_id>/``: POST
 
    DESC
       Update Single post data by post_id.
