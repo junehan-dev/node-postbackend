@@ -13,18 +13,26 @@ const create_schema = new mongoose.Schema(
 	
 const list_schema = new mongoose.Schema(
 	{
-		author: { type: String },
-		title: { type: String },
-		content: { type: String },
-		created: { type: Date },
 	},
 	{
 		collection: "posts"
 	}
 );
 
+const update_schema = new mongoose.Schema(
+	{
+		author: { type: String, required: true },
+		title: { type: String, required: true },
+		content: { type: String, required: true },
+	},
+	{
+		collection: "posts"
+	}
+)
 const create_model = mongoose.model("POST_WRITE", create_schema);
 const list_model = mongoose.model("POST_READ", list_schema);
+const update_model = mongoose.model("POST_UPDATE", update_schema);
 
 module.exports.ListModel = list_model;
 module.exports.CreateModel = create_model;
+module.exports.UpdateModel = update_model;
