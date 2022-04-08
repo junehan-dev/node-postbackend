@@ -1,5 +1,6 @@
 SOURCES		= $(wildcard ./src/*.js)\
-			 $(wildcard ./src/**/*.js)
+			 $(wildcard ./src/**/*.js)\
+			 $(wildcard ./src/**/**/*.js)\
 
 .PHONY: all
 all:
