@@ -56,8 +56,25 @@ function updatePost(req, res) {
 		}
 	});
 }
+
+function deletePost(req, res) {
+	console.log(req);
+	const model = ListModel;
+	const query = model.findByIdAndRemove(req.params["postId"]);
+	query.exec((err, data) => {
+		if (err) {
+			console.log(err);
+			res.status(404).end();
+		} else {
+			console.log(data);
+			res.json(data);
+		}
+	});
+}
+
 module.exports.listPost = listPost;
 module.exports.createPost = createPost;
 module.exports.detailPost = detailPost;
 module.exports.updatePost = updatePost;
+module.exports.deletePost = deletePost;
 
