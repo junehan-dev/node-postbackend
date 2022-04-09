@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Post and comment</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+<script>
+$(document).ready(function () {
+	show_bucket();
+});
+
+function render_bucket(bucket) {
+	let to_html;
+	to_html = `<li>
+			<p>created: ${bucket["content"]}</p>
+			<p>created: ${bucket["created"]}</p>
+			<button onclick="delete_bucket(this)" data-id="${bucket['_id']}" type="button" class="btn btn-outline-primary">삭제!</button>
+			<button onclick="update_bucket(this)" data-id="${bucket['_id']}" type="button" class="btn btn-outline-primary">수정!</button>
+		</li>`;
+	$("#bucket-list").append(to_html);
+}
+
+function show_bucket(){
+	const post_id = window.location.toString().split('/')[3];
+	$.ajax({
+		type: "GET",
+		url: `/api/comment/${post_id}/`,
+		data: {},
+		success: function (response) {
+			console.log(response);
+			$("#bucket-list").empty();
+			response.map(render_bucket);
+		}
+	});
+}
+
+function delete_bucket(t) {
+	v = $(t).data("id");
+	$.ajax({
+		type: "DELETE",
+		url: `/api/comment/${v}/`,
+		data: {},
+		success: function (response) {
+			console.log(response);
+			show_bucket();
+		}
+	});
+}
+
+function save_bucket(t){
+	$.ajax({
+		type: "POST",
+		url: `/api/comment/`,
+		data: {
+			content: $("#content").val(),
+			post_id: $(t).data("id")
+		},
+		success: function (response) {
+			console.log(response);
+			show_bucket();
+		}
+	});
+}
+
+function update_bucket(t){
+	v = $(t).data("id");
+	$.ajax({
+		type: "POST",
+		url: `/api/comment/${v}/`,
+		data: {
+			content:$("#content").val(),
+		},
+		success: function (response) {
+			console.log(response);
+			show_bucket();
+		}
+	});
+}
+
+</script>
+  </head>
+  <body>
+    <h1><%= object.title %></h1>
+    <p>author: <%= object.author %></p>
+    <p>content: <%= object.content %></p>
+	<div>
+		<input type="text" id="content"placeholder="comment"></input>
+		<button onclick=save_bucket(this) data-id="<%= object.id %>">추가</button>
+	</div>
+	<div>
+		<ol id="bucket-list"> 
+		</ol>
+	</div>
+  </body>
+</html>

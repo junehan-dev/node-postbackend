@@ -18,9 +18,9 @@ async function listPost() {
 	return (ret);
 }
 
-async function detailPost(req) {
+async function detailPost(post_id) {
 	const model = PostModel;
-	const query = model.findById(req.params["postId"]).select(["author", "title", "created", "content"]);
+	const query = model.findById(post_id).select(["author", "title", "created", "content"]);
 	const prom = new Promise((resolve, reject) => {
 		query.exec((err, data) => {
 			console.log(data);
@@ -44,9 +44,10 @@ async function updatePost(post_id, data) {
 	return (ret);
 }
 
-async function deletePost(req) {
+async function deletePost(post_id) {
 	const model = PostModel;
-	const query = model.findByIdAndRemove(req.params["postId"]);
+	console.log("DEL", post_id);
+	const query = model.findByIdAndRemove(post_id);
 	const prom = new Promise((resolve, reject) => {
 		query.exec((err, data) => {
 			console.log(data);

@@ -6,9 +6,9 @@ async function createComment(data) {
 	return (ret);
 }
 
-async function listComment() {
+async function listComment(post_id) {
 	const model = CommentModel;
-	const query = model.find().select(["content", "_id"]).sort({created: "desc"});
+	const query = model.find({"post_id": post_id}).select(["content", "_id", "created"]).sort({created: "desc"});
 	const prom = new Promise((resolve, reject) => {
 		query.exec((err, data) => {
 			(err || !data) ?  reject(err) : resolve(data);
@@ -44,9 +44,9 @@ async function updateComment(comment_id, data) {
 	return (ret);
 }
 
-async function deleteComment(req) {
+async function deleteComment(comment_id) {
 	const model = CommentModel;
-	const query = model.findByIdAndRemove(req.params["comment_id"]);
+	const query = model.findByIdAndRemove(comment_id);
 	const prom = new Promise((resolve, reject) => {
 		query.exec((err, data) => {
 			console.log(data);

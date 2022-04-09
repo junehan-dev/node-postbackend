@@ -6,7 +6,8 @@ function create(req, res, next) {
 }
 
 function list(req, res, next) {
-	const prom = listComment();
+	console.log("HI");
+	const prom = listComment(req.params["post_id"]);
 	return response(prom, res, next);
 }
 
