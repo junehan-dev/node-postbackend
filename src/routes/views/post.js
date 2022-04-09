@@ -1,7 +1,12 @@
-const {createPost, listPost, updatePost, deletePost} = require("./services/post");
+const {createPost, listPost, updatePost, deletePost, detailPost} = require("./services/post");
 
 function create(req, res, next) {
 	const prom = createPost(req.body);
+	return response(prom, res, next);
+}
+
+function detail(req, res, next) {
+	const prom = detailPost(req.params["post_id"]);
 	return response(prom, res, next);
 }
 
@@ -32,4 +37,5 @@ module.exports.list_view = list;
 module.exports.create_view = create;
 module.exports.update_view = update;
 module.exports.delete_view = remove;
+module.exports.detail_view = detail;
 

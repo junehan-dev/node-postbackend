@@ -1,10 +1,12 @@
-const express		= require("express");
-const app			= express();
-const port			= 3000;
-const logger		= require("morgan");
-const postRouter 	= require("./routes/post_router");
-const commentRouter	= require("./routes/comment_router");
-const mongoose		= require("mongoose");
+const path				= require("path");
+const express			= require("express");
+const logger			= require("morgan");
+const mongoose			= require("mongoose");
+const postRouter 		= require("./routes/post_router");
+const commentRouter		= require("./routes/comment_router");
+const templateRouter	= require("./routes/template_router");
+const port				= 3000;
+const app				= express();
 
 function setup_mongoose(m) {
 	m.connection.on("open", () => console.log("Connected"));
@@ -20,13 +22,18 @@ function setup_mongoose(m) {
 }
 
 setup_mongoose(mongoose);
-app.set("view engine", "pug");
+app.set("views", path.join(path.resolve("./"), "templates"));
+app.set("view engine", "ejs");
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+app.set(express.static(path.join(path.resolve("./"), "public")));
 app.use("/api/post", postRouter);
 app.use("/api/comment", commentRouter);
-app.get("/", (req, res) => res.status(200).end());
+app.use("", templateRouter);
+/* eslint-disable */
+app.use((req, res, next) => next(createError(404)));
+/* eslint-enable */
 app.use(function(err, req, res, next) {
 	res.locals.message = err.message;
 	res.locals.error = req.app.get("env") === "development" ? err : {};

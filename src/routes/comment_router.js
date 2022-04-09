@@ -5,8 +5,8 @@ const {list_view
 	,update_view
 	,delete_view}	= require("./views/comment");
 
-Router.get("/", list_view);
 Router.post("/", create_view);
+Router.get("/:post_id/", list_view);
 Router.post("/:comment_id/", update_view);
 Router.delete("/:comment_id/", delete_view);
 
