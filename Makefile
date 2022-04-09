@@ -13,7 +13,7 @@ view: $(SOURCES)
 
 .PHONY: lint
 lint: $(SOURCES)
-	npx eslint $(SOURCES)
+	npx eslint ./src
 
 .PHONY: debug
 debug: lint
