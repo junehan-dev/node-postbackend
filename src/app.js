@@ -3,7 +3,7 @@ const app			= express();
 const port			= 3000;
 const logger		= require("morgan");
 const postRouter 	= require("./routes/post_router");
-//const commentRouter	= require("./routes/comment_router");
+const commentRouter	= require("./routes/comment_router");
 const mongoose		= require("mongoose");
 
 function setup_mongoose(m) {
@@ -25,7 +25,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use("/api/post", postRouter);
-//app.use("/api/comment", commentRouter);
+app.use("/api/comment", commentRouter);
 app.get("/", (req, res) => res.status(200).end());
 app.use(function(err, req, res, next) {
 	res.locals.message = err.message;

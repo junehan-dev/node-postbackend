@@ -1,22 +1,22 @@
-const {createPost, listPost, updatePost, deletePost} = require("./services/post");
+const {createComment, listComment, updateComment, deleteComment} = require("./services/comment");
 
 function create(req, res, next) {
-	const prom = createPost(req.body);
+	const prom = createComment(req.body);
 	return response(prom, res, next);
 }
 
 function list(req, res, next) {
-	const prom = listPost();
+	const prom = listComment();
 	return response(prom, res, next);
 }
 
 function update(req, res, next) {
-	const prom = updatePost(req.params["post_id"], req.body);
+	const prom = updateComment(req.params["comment_id"], req.body);
 	return response(prom, res, next);
 }
 
 function remove(req, res, next) {
-	const prom = deletePost(req.params["post_id"]);
+	const prom = deleteComment(req.params["comment_id"]);
 	return response(prom, res, next);
 }
 
