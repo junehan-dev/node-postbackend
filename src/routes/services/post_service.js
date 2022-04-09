@@ -1,4 +1,5 @@
 const { PostModel } = require("./models/post_model");
+const { CommentModel } = require("./models/comment_model");
 
 function createPost(req, res) {
 	const model = new PostModel(req.body);
@@ -22,6 +23,7 @@ function detailPost(req, res) {
 	const model = PostModel;
 	const query = model.findById(req.params["postId"]).select(["author", "title", "created", "content"]);
 	query.exec((err, data) => {
+		console.log(data);
 		(err) ?	res.status(404).end() : res.json(data);
 	});
 }
@@ -37,11 +39,17 @@ function updatePost(req, res) {
 function deletePost(req, res) {
 	const model = PostModel;
 	const query = model.findByIdAndRemove(req.params["postId"]);
+	
 	query.exec((err, data) => {
-		if (err)
+		if (err) {
 			res.status(404).end();
-		else
-			((data === null) ? res.status(204).end() : res.status(200).end());
+		} else {
+			if (data === null) {
+				res.status(204).end();
+			} else {
+				CommentModel.deleteMany({"post_id": req.params["postId"]}).then(() => res.status(200).end());
+			}
+		}
 	});
 }
 

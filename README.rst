@@ -11,7 +11,7 @@ HOWTO
 API
 ---
 
-:``/api/post/``: GET 
+:``/api/post/``: GET POST_LIST
 
    DESC
       Provide proper amount of posting data.
@@ -23,7 +23,7 @@ API
       - Failure(404)
          No respose data. respond for status of 404 only.
 
-:``/api/post/``: POST
+:``/api/post/``: POST MAKE_POST
 
    DESC
       Create a post for author's content.
@@ -36,7 +36,7 @@ API
       - Failure(404)
          No respose data. respond for status of 404 only.
 
-:``/api/post/<id\:post_id>/``: GET
+:``/api/post/<id\:post_id>/``: GET DETAIL_POST
 
    DESC
       Retrive Single post data by post_id.
@@ -48,7 +48,7 @@ API
       - Failure(404)
          No respose data. respond for status of 404 only.
 
-:``/api/post/<id\:post_id>/``: POST
+:``/api/post/<id\:post_id>/``: POST UPDATE_POST
 
    DESC
       Update Single post data by post_id.
@@ -61,7 +61,7 @@ API
       - Failure(404)
          No respose data. respond for status of 404 only.
 
-:``/api/post/<id\:post_id>/``: DELETE
+:``/api/post/<id\:post_id>/``: DELETE DELETE_POST
 
    DESC
       DELETE Single post data by post_id.
@@ -75,3 +75,54 @@ API
       - Failure(404)
          No respose data. respond for status of 404 only.
 
+:``/api/comment/<id\:post_id>/``: GET COMMENT_LIST
+
+   DESC
+      GET every comment order by created DESC.
+
+   RETURNS
+      - Success(200)
+         COMMENTS ON POST.POST_ID
+      - Failure(404)
+         POST INVALID
+      - Failure(500)
+         NETWORK ERROR
+
+:``/api/comment/<id\:post_id>/``: POST COMMENT_CREATE
+
+   DESC
+      CREATE a comment on specified post with content.
+
+   RETURNS
+      - Success(200)
+         COMMENT ON POST.POST_ID
+         <Comment[_id, content, post_id]>
+      - Failure(500)
+         POST INVALID
+      - Failure(404)
+         NETWORK ERROR
+
+:``/api/comment/ignore/<id\:comment_id>``: POST COMMENT_UPDATE
+
+   DESC
+      UPDATE a comment content.
+
+   RETURNS
+      - Success(200)
+         COMMENT ON POST.POST_ID
+         <Comment[_id, content, post_id]>
+      - Failure(204)
+         No COMMENT FOUND.
+      - Failure(404)
+         NETWORK ERROR
+
+:``/api/comment/ignore/<id\:comment_id>``: DELETE COMMENT_DELETE
+
+   DESC
+      UPDATE a comment content.
+
+   RETURNS
+      - Success(200)
+         DELETED OK
+      - Failure(404)
+         Db server rejected request.
