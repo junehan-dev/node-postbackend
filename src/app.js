@@ -20,9 +20,13 @@ function setup_mongoose(m) {
 }
 
 setup_mongoose(mongoose);
+app.set("view engine", "pug");
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+app.use("/api/post", postRouter);
+app.use("/api/comment", commentRouter);
+app.get("/", (req, res) => res.status(200).end());
 app.use(function(err, req, res, next) {
 	res.locals.message = err.message;
 	res.locals.error = req.app.get("env") === "development" ? err : {};
@@ -31,9 +35,6 @@ app.use(function(err, req, res, next) {
 	next();
 });
 
-app.use("/api/post", postRouter);
-app.use("/api/comment", commentRouter);
-app.get("/", (req, res) => res.status(200).end());
 
 app.listen(port, () => {
 	console.log(`Example app listening on port ${port}`);

@@ -1,8 +1,14 @@
-const express = require("express");
-const Router = express.Router({"caseSensitive" : true, "strict" : true});
-const {listComment, createComment, updateComment, deleteComment} = require("./services/comment_service");
+const express		= require("express");
+const Router		= express.Router({"caseSensitive" : true, "strict" : true});
+const {list_view
+	,create_view
+	,update_view
+	,delete_view}	= require("./views/comment");
 
-Router.route("/cr/:post_id/").get(listComment).post(createComment);
-Router.route("/ud/:comment_id/").post(updateComment).delete(deleteComment);
+Router.get("/", list_view);
+Router.post("/", create_view);
+Router.post("/:comment_id/", update_view);
+Router.delete("/:comment_id/", delete_view);
+
 module.exports = Router;
 
