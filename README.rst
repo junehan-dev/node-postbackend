@@ -115,3 +115,14 @@ API
          No COMMENT FOUND.
       - Failure(404)
          NETWORK ERROR
+
+:``/api/comment/ignore/<id\:comment_id>``: DELETE COMMENT_DELETE
+
+   DESC
+      UPDATE a comment content.
+
+   RETURNS
+      - Success(200)
+         DELETED OK
+      - Failure(404)
+         Db server rejected request.
