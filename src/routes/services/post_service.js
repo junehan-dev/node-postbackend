@@ -67,7 +67,7 @@ function deletePost(req, res) {
 			res.status(404).end();
 		} else {
 			console.log(data);
-			res.json(data);
+			(data === null) ? res.status(204).end() : res.status(200).end();
 		}
 	});
 }

@@ -40,7 +40,7 @@ API
 
    DESC
       Retrive Single post data by post_id.
-      api fails mostly on network IO INSERT failed.
+      api fails mostly on network IO FIND failed.
 
    RETURNS
       - Success(200)
@@ -52,12 +52,26 @@ API
 
    DESC
       Update Single post data by post_id.
-      api fails mostly on network IO INSERT failed.
+      api fails mostly on network IO UPDATE failed.
       update with POST data "title, author, content"
 
    RETURNS
       - Success(200)
          <Yet updated POST [<author:str>, <title:str>, <content:str>, <created:date>]>
+      - Failure(404)
+         No respose data. respond for status of 404 only.
+
+:``/api/post/<id\:post_id>/``: DELETE
+
+   DESC
+      DELETE Single post data by post_id.
+      api fails mostly on network IO DELETE failed.
+
+   RETURNS
+      - Success(200)
+         No respose data. respond for status of 200 only.
+      - No Content(204)
+         No respose data. respond for status of 204 only.
       - Failure(404)
          No respose data. respond for status of 404 only.
 
