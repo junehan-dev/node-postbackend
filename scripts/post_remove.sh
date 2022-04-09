@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "test post delete.."
-if [ $1 -z ]
+if [ -z $1 ];
 then
 	echo "id input NOT found"
 else

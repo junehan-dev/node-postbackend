@@ -1,7 +1,7 @@
 #!/bin/bash
 d = date
 echo "test post update.."
-if [ $1 -z ]
+if [ -z $1 ];
 then
 	echo "id input NOT found"
 else
