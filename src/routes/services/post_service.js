@@ -1,9 +1,9 @@
-const { CreateModel, ListModel, UpdateModel } = require("./models/post_model");
+const { PostModel } = require("./models/post_model");
 
 console.log("SEE This message at first time.");
 
 function createPost(req, res) {
-	const model = new CreateModel(req.body);
+	const model = new PostModel(req.body);
 	const prom = model.save();
 	prom.then((data) => {
 		console.log(data);
@@ -15,7 +15,7 @@ function createPost(req, res) {
 }
 
 function listPost(req, res) {
-	const model = ListModel;
+	const model = PostModel;
 	const query = model.find().select(["author", "title", "created"]).sort({created: "desc"}).limit(10);
 	query.exec((err, data) => {
 		if (err) {
@@ -29,7 +29,7 @@ function listPost(req, res) {
 }
 
 function detailPost(req, res) {
-	const model = ListModel;
+	const model = PostModel;
 	const query = model.findById(req.params["postId"]).select(["author", "title", "created", "content"]);
 	query.exec((err, data) => {
 		if (err) {
@@ -44,7 +44,7 @@ function detailPost(req, res) {
 
 function updatePost(req, res) {
 	console.log(req.body);
-	const model = UpdateModel;
+	const model = PostModel;
 	const query = model.findByIdAndUpdate(req.params["postId"], req.body);
 	query.exec((err, data) => {
 		if (err) {
@@ -59,7 +59,7 @@ function updatePost(req, res) {
 
 function deletePost(req, res) {
 	console.log(req);
-	const model = ListModel;
+	const model = PostModel;
 	const query = model.findByIdAndRemove(req.params["postId"]);
 	query.exec((err, data) => {
 		if (err) {
