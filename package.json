@@ -24,7 +24,8 @@
     "express": "^4.17.3",
     "http-errors": "^2.0.0",
     "mongoose": "^6.2.10",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "pug": "^3.0.2"
   },
   "devDependencies": {
     "eslint": "^8.12.0"
