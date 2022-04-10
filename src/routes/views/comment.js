@@ -1,6 +1,8 @@
 const {createComment, listComment, updateComment, deleteComment} = require("./services/comment");
 
 function create(req, res, next) {
+	if (!req.body["content"])
+		return res.send("댓글 내용을 입력해주세요.");
 	const prom = createComment(req.body);
 	return response(prom, res, next);
 }
@@ -12,6 +14,8 @@ function list(req, res, next) {
 }
 
 function update(req, res, next) {
+	if (!req.body["content"])
+		return res.send("댓글 내용을 입력해주세요.");
 	const prom = updateComment(req.params["comment_id"], req.body);
 	return response(prom, res, next);
 }

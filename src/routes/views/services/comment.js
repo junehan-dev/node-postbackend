@@ -18,19 +18,6 @@ async function listComment(post_id) {
 	return (ret);
 }
 
-async function detailComment(req) {
-	const model = CommentModel;
-	const query = model.findBy_id(req.params["comment_id"]);
-	const prom = new Promise((resolve, reject) => {
-		query.exec((err, data) => {
-			console.log(data);
-			(err || !data) ? reject(err) : resolve(data);
-		});
-	});
-	const ret = await prom;
-	return (ret);
-}
-
 async function updateComment(comment_id, data) {
 	const model = CommentModel;
 	const query = model.findByIdAndUpdate(comment_id, data);
@@ -59,7 +46,6 @@ async function deleteComment(comment_id) {
 
 module.exports.listComment = listComment;
 module.exports.createComment = createComment;
-module.exports.detailComment = detailComment;
 module.exports.updateComment = updateComment;
 module.exports.deleteComment = deleteComment;
 
