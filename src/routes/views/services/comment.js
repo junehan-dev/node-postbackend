@@ -23,7 +23,6 @@ async function updateComment(comment_id, data) {
 	const query = model.findByIdAndUpdate(comment_id, data);
 	const prom = new Promise((resolve, reject) => {
 		query.exec((err, data) => {
-			console.log(data);
 			(err || !data) ? reject(err) : resolve(data);
 		});
 	});
@@ -36,7 +35,6 @@ async function deleteComment(comment_id) {
 	const query = model.findByIdAndRemove(comment_id);
 	const prom = new Promise((resolve, reject) => {
 		query.exec((err, data) => {
-			console.log(data);
 			(err || !data) ? reject(err) : resolve(data);
 		});
 	});

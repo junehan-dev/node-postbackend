@@ -1,9 +1,13 @@
 const {createComment, listComment, updateComment, deleteComment} = require("./services/comment");
+const {detailPost} = require("./services/post");
 
-function create(req, res, next) {
+async function create(req, res, next) {
 	if (!req.body["content"])
 		return res.send("댓글 내용을 입력해주세요.");
-	const prom = createComment(req.body);
+	let prom = await detailPost(req.body["post_id"]);
+	if (!prom["_id"] || prom["_id"].toString() !== req.body["post_id"])
+		return res.status(400).end();
+	prom = createComment(req.body);
 	return response(prom, res, next);
 }
 

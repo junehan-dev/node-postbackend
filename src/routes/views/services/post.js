@@ -23,7 +23,6 @@ async function detailPost(post_id) {
 	const query = model.findById(post_id).select(["author", "title", "created", "content"]);
 	const prom = new Promise((resolve, reject) => {
 		query.exec((err, data) => {
-			console.log(data);
 			(err || !data) ? reject(err) : resolve(data);
 		});
 	});
@@ -36,7 +35,6 @@ async function updatePost(post_id, data) {
 	const query = model.findByIdAndUpdate(post_id, data);
 	const prom = new Promise((resolve, reject) => {
 		query.exec((err, data) => {
-			console.log(data);
 			(err || !data) ? reject(err) : resolve(data);
 		});
 	});
@@ -50,7 +48,6 @@ async function deletePost(post_id) {
 	const query = model.findByIdAndRemove(post_id);
 	const prom = new Promise((resolve, reject) => {
 		query.exec((err, data) => {
-			console.log(data);
 			(err || !data) ? reject(err) : resolve(data);
 		});
 	});
