@@ -1,9 +1,11 @@
 SOURCES		= $(wildcard ./src/*.js)\
-			 $(wildcard ./src/**/*.js)
+			 $(wildcard ./src/**/*.js)\
+			 $(wildcard ./src/**/**/*.js)
 
 .PHONY: all
-all:
+all: 
 	@echo "NO DEFAULT GOAL"
+	@echo "make debug to RUN DEBUG MODE"
 
 .PHONY: view
 view: $(SOURCES)
@@ -11,15 +13,9 @@ view: $(SOURCES)
 
 .PHONY: lint
 lint: $(SOURCES)
-	npx eslint $(SOURCES)
+	npx eslint ./src
 
-.PHONY: test
-test: lint
-	@echo "TEST..."
-	DEBUG=src:* npm run server
-
-.PHONY: ctype
-ctype: $(CTYPE_OBJECTS)
-	ar rcs libft_ctype.a $(CTYPE_OBJECTS)	
-	ranlib libft_ctype.a
+.PHONY: debug
+debug: lint
+	/bin/sh ./.secret.sh &&	DEBUG=src:* npm run server
 
