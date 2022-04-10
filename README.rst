@@ -70,10 +70,9 @@ API
    RETURNS
       - Success(200)
          No respose data. respond for status of 200 only.
-      - No Content(204)
-         No respose data. respond for status of 204 only.
       - Failure(404)
-         No respose data. respond for status of 404 only.
+         - IO error respond for status of 404 only.
+         - no target respond for status of 404 only.
 
 :``/api/comment/<id\:post_id>/``: GET COMMENT_LIST
 
@@ -84,9 +83,7 @@ API
       - Success(200)
          COMMENTS ON POST.POST_ID
       - Failure(404)
-         POST INVALID
-      - Failure(500)
-         NETWORK ERROR
+         IO error respond for status of 404 only.
 
 :``/api/comment/<id\:post_id>/``: POST COMMENT_CREATE
 
@@ -95,12 +92,13 @@ API
 
    RETURNS
       - Success(200)
-         COMMENT ON POST.POST_ID
-         <Comment[_id, content, post_id]>
-      - Failure(500)
-         POST INVALID
+         - COMMENT ON POST.POST_ID
+            - <Comment[_id, content, post_id]>
+         - Error on no content with "no content data in request to create"
+      - Failure(400)
+         post invalid respond for status of 400 only.
       - Failure(404)
-         NETWORK ERROR
+         IO error respond for status of 404 only.
 
 :``/api/comment/ignore/<id\:comment_id>``: POST COMMENT_UPDATE
 
@@ -109,12 +107,11 @@ API
 
    RETURNS
       - Success(200)
-         COMMENT ON POST.POST_ID
-         <Comment[_id, content, post_id]>
-      - Failure(204)
-         No COMMENT FOUND.
+         - COMMENT ON POST.POST_ID
+            - <Comment[_id, content, post_id]>
+         - Error on no content with "no content data in request to create"
       - Failure(404)
-         NETWORK ERROR
+         IO error respond for status of 404 only.
 
 :``/api/comment/ignore/<id\:comment_id>``: DELETE COMMENT_DELETE
 
@@ -125,4 +122,5 @@ API
       - Success(200)
          DELETED OK
       - Failure(404)
-         Db server rejected request.
+         - IO error respond for status of 404 only.
+         - no target respond for status of 404 only.
