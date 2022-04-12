@@ -32,6 +32,10 @@ async function detailPost(post_id) {
 
 async function updatePost(post_id, data) {
 	const model = PostModel;
+	for (let key in data) {
+		if (!data[key])
+			delete(data[key]);
+	}
 	const query = model.findByIdAndUpdate(post_id, data);
 	const prom = new Promise((resolve, reject) => {
 		query.exec((err, data) => {
@@ -44,7 +48,6 @@ async function updatePost(post_id, data) {
 
 async function deletePost(post_id) {
 	const model = PostModel;
-	console.log("DEL", post_id);
 	const query = model.findByIdAndRemove(post_id);
 	const prom = new Promise((resolve, reject) => {
 		query.exec((err, data) => {

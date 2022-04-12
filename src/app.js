@@ -1,6 +1,6 @@
 const path				= require("path");
 const express			= require("express");
-const logger			= require("morgan");
+const morgan			= require("morgan");
 const mongoose			= require("mongoose");
 const postRouter 		= require("./routes/post_router");
 const commentRouter		= require("./routes/comment_router");
@@ -24,7 +24,7 @@ function setup_mongoose(m) {
 setup_mongoose(mongoose);
 app.set("views", path.join(path.resolve("./"), "templates"));
 app.set("view engine", "ejs");
-app.use(logger("dev"));
+app.use(morgan("combined", {skip: (_, res) => (res.statusCode < 400)}));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.set(express.static(path.join(path.resolve("./"), "public")));

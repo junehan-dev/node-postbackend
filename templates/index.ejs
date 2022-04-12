@@ -25,7 +25,6 @@ function render_bucket(bucket) {
 			<p>${bucket["_id"]}</p>
 			<button onclick="delete_bucket(this)" data-id="${bucket['_id']}" type="button" class="btn btn-outline-primary">삭제!</button>
 			<button onclick="update_bucket(this)" data-id="${bucket['_id']}" type="button" class="btn btn-outline-primary">수정!</button>
-			<button onclick="detail_bucket(this)" data-id="${bucket['_id']}" type="button" class="btn btn-outline-primary">내용보기</button>
 
 		</li>`;
 	$("#bucket-list").append(to_html);
@@ -40,6 +39,10 @@ function show_bucket(){
 			console.log(response);
 			$("#bucket-list").empty();
 			response.map(render_bucket);
+		},
+		error: function (err) {
+			console.log(err);
+			window.alert(err.responseText);
 		}
 	});
 }
@@ -53,6 +56,10 @@ function delete_bucket(t) {
 		success: function (response) {
 			console.log(response);
 			show_bucket();
+		},
+		error: function (err) {
+			console.log(err);
+			window.alert(err.responseText);
 		}
 	});
 }
@@ -69,6 +76,10 @@ function save_bucket(){
 		success: function (response) {
 			console.log(response);
 			show_bucket();
+		},
+		error: function (err) {
+			console.log(err);
+			window.alert(err.responseText);
 		}
 	});
 }
@@ -87,6 +98,10 @@ function update_bucket(t){
 		success: function (response) {
 			console.log(response);
 			show_bucket();
+		},
+		error: function (err) {
+			console.log(err);
+			window.alert(err.responseText);
 		}
 	});
 }

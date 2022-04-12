@@ -2,26 +2,31 @@ const {createPost, listPost, updatePost, deletePost, detailPost} = require("./se
 
 function create(req, res, next) {
 	const prom = createPost(req.body);
+	prom.catch((err)=> next(err));
 	return response(prom, res, next);
 }
 
 function detail(req, res, next) {
 	const prom = detailPost(req.params["post_id"]);
+	prom.catch((err)=> next(err));
 	return response(prom, res, next);
 }
 
 function list(req, res, next) {
 	const prom = listPost();
+	prom.catch((err)=> next(err));
 	return response(prom, res, next);
 }
 
 function update(req, res, next) {
 	const prom = updatePost(req.params["post_id"], req.body);
+	prom.catch((err)=> next(err));
 	return response(prom, res, next);
 }
 
 function remove(req, res, next) {
 	const prom = deletePost(req.params["post_id"]);
+	prom.catch((err)=> next(err));
 	return response(prom, res, next);
 }
 
